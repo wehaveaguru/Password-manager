@@ -22,7 +22,6 @@ website_entry.insert(0,"example.com")
 email_entry=Entry(width=35)
 email_entry.focus()
 email_entry.insert(0,"user@example.com")
-
 password_entry=Entry(width=21)
 password_entry.focus()
 
@@ -32,13 +31,32 @@ password_entry.grid(row=3,column=1)
 
 def generate_password():
     import random
+    characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()"
+    password = ''.join(random.choice(characters) for i in range(12))
+    password_entry.delete(0, END)
+    password_entry.insert(0, password)
+    
+def add_password():
+    website = website_entry.get()
+    email = email_entry.get()
+    password = password_entry.get()
+    
+    if len(website) == 0 or len(email) == 0 or len(password) == 0:
+        print("Please fill out all fields.")
+        return
+    
+    with open("passwords.txt", "a") as file:
+        file.write(f"{website} | {email} | {password}\n")
+    
+    website_entry.delete(0, END)
+    email_entry.delete(0, END)
+    password_entry.delete(0, END)
     
     
 
 
 gen_password_button=Button(text="Generate Password",command=generate_password)
 gen_password_button.grid(row=3,column=2)
-add_button=Button(text="Add",width=36)
+add_button=Button(text="Add",width=36,command=add_password)
 add_button.grid(row=4,column=1,columnspan=2)
-
 window.mainloop()
