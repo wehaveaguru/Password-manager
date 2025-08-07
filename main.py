@@ -18,10 +18,8 @@ password.grid(row=3,column=0)
 
 website_entry=Entry(width=35)
 website_entry.focus()
-website_entry.insert(0,"example.com")
 email_entry=Entry(width=35)
 email_entry.focus()
-email_entry.insert(0,"user@example.com")
 password_entry=Entry(width=21)
 password_entry.focus()
 
